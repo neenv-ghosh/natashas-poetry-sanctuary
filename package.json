@@ -61,6 +61,8 @@
     },
     "files": [
       "dist/**/*",
+      "main.cjs",
+      "package.json",
       "electron/**/*"
     ],
     "mac": {
