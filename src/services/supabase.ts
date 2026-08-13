@@ -21,7 +21,12 @@ const validUrl = isSupabaseConfigured() ? supabaseUrl : 'https://placeholder.sup
 const validKey = isSupabaseConfigured() ? supabaseAnonKey : 'placeholder-anon-key';
 
 export const supabase: SupabaseClient = createClient(validUrl, validKey, {
-  auth: { persistSession: false },
+  auth: { 
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: false, // Prevents file:// URL parsing issues in Electron
+    storage: window.localStorage,
+  },
   realtime: {
     params: {
       eventsPerSecond: 10,

@@ -10,6 +10,7 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
+      webSecurity: false, // Allows file:// protocol to send HTTPS & WebSocket requests to Supabase
     },
     show: false,
   });
