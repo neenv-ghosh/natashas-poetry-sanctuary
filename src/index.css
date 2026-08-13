@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@layer components {
+  .ProseMirror {
+    outline: none !important;
+  }
+  .ProseMirror p {
+    margin-bottom: 0.5em;
+    line-height: 1.45;
+  }
+  .ProseMirror p.is-editor-empty:first-child::before {
+    color: #8c7e6b;
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+    font-style: italic;
+    opacity: 0.7;
+  }
+
+  /* --- Add these for the frameless draggable window bar --- */
+  .window-drag-bar {
+    -webkit-app-region: drag;
+  }
+
+  .window-no-drag {
+    -webkit-app-region: no-drag;
+  }
+}

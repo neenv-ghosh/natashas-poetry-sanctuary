@@ -1,0 +1,88 @@
+import { FontOption } from '../types';
+
+export const FONT_LIBRARY: FontOption[] = [
+  {
+    id: 'cormorant',
+    name: 'Cormorant Garamond',
+    family: "'Cormorant Garamond', serif",
+    category: 'serif',
+    description: 'Elegant, high-contrast display serif modeled after 16th-century type',
+  },
+  {
+    id: 'playfair',
+    name: 'Playfair Display',
+    family: "'Playfair Display', serif",
+    category: 'serif',
+    description: 'Classic European Enlightenment serif with graceful letterforms',
+  },
+  {
+    id: 'eb-garamond',
+    name: 'EB Garamond',
+    family: "'EB Garamond', serif",
+    category: 'serif',
+    description: 'Revival of Claude Garamont’s famous Renaissance roman designs',
+  },
+  {
+    id: 'libre-baskerville',
+    name: 'Libre Baskerville',
+    family: "'Libre Baskerville', serif",
+    category: 'serif',
+    description: 'Web font optimized for reading body text with wide counters',
+  },
+  {
+    id: 'crimson-text',
+    name: 'Crimson Text',
+    family: "'Crimson Text', serif",
+    category: 'serif',
+    description: 'Book-production serif font family designed specifically for poetry',
+  },
+  {
+    id: 'lora',
+    name: 'Lora',
+    family: "'Lora', serif",
+    category: 'serif',
+    description: 'Contemporary serif with roots in calligraphy and warm curves',
+  },
+  {
+    id: 'merriweather',
+    name: 'Merriweather',
+    family: "'Merriweather', serif",
+    category: 'serif',
+    description: 'Pleasant to read on screens with sturdy serifs and open forms',
+  },
+  {
+    id: 'georgia',
+    name: 'Georgia',
+    family: "Georgia, 'Times New Roman', serif",
+    category: 'serif',
+    description: 'Legible transitional serif typeface with high legibility',
+  },
+  {
+    id: 'times',
+    name: 'Times New Roman',
+    family: "'Times New Roman', Times, serif",
+    category: 'serif',
+    description: 'Traditional editorial typeface used in classic manuscripts',
+  },
+  {
+    id: 'cinzel',
+    name: 'Cinzel',
+    family: "'Cinzel', serif",
+    category: 'serif',
+    description: 'Classical Roman proportions with modern elegance',
+  },
+  {
+    id: 'caveat',
+    name: 'Caveat (Handwritten)',
+    family: "'Caveat', cursive",
+    category: 'script',
+    description: 'Warm handwritten script for personal annotations and intimate notes',
+  },
+  {
+    id: 'sans',
+    name: 'Plus Jakarta Sans',
+    family: "'Plus Jakarta Sans', sans-serif",
+    category: 'sans-serif',
+    description: 'Modern clean geometric sans-serif for structured notes and letters',
+  },
+];

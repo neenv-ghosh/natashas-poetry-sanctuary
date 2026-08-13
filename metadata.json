@@ -1,0 +1,6 @@
+{
+  "name": "Natasha's Poetry Sanctuary",
+  "description": "A personal desktop sanctuary and living anthology of poems, letters, and memory photos written for Natasha Raman by Neenv.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
