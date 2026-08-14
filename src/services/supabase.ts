@@ -2,21 +2,42 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { PalimpsestDocument } from '../types';
 import { INITIAL_DOCUMENTS } from '../data/initialData';
 
-const env = (import.meta as any).env || {};
-const rawUrl = (env.VITE_SUPABASE_URL || '').trim();
-const rawKey = (env.VITE_SUPABASE_ANON_KEY || '').trim();
+// Extract and strip accidental quotes or whitespace
+const getEnvVar = (key: string): string => {
+  try {
+    const env = (import.meta as any).env || {};
+    const val = env[key] || '';
+    return String(val).replace(/^["']|["']$/g, '').trim();
+  } catch {
+    return '';
+  }
+};
 
-// Check if credentials are properly set
+const rawUrl = getEnvVar('VITE_SUPABASE_URL');
+const rawKey = getEnvVar('VITE_SUPABASE_ANON_KEY');
+
+// Strict URL validator using native browser URL parser
+const isValidHttpUrl = (urlString: string): boolean => {
+  if (!urlString) return false;
+  try {
+    const parsed = new URL(urlString);
+    return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+  } catch {
+    return false;
+  }
+};
+
+// Check if credentials are validly configured
 export const isSupabaseConfigured = (): boolean => {
   return (
-    Boolean(rawUrl) &&
+    isValidHttpUrl(rawUrl) &&
     Boolean(rawKey) &&
     rawUrl !== 'https://your-supabase-url.supabase.co' &&
     rawKey !== 'your-anon-key'
   );
 };
 
-// Fallback or active client instantiation (ALWAYS guaranteed to be a valid URL string)
+// ALWAYS guaranteed to be a valid HTTP/HTTPS URL string
 const validUrl = isSupabaseConfigured() ? rawUrl : 'https://placeholder.supabase.co';
 const validKey = isSupabaseConfigured() ? rawKey : 'placeholder-anon-key';
 
