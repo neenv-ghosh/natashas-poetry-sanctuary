@@ -3,22 +3,22 @@ import { PalimpsestDocument } from '../types';
 import { INITIAL_DOCUMENTS } from '../data/initialData';
 
 const env = (import.meta as any).env || {};
-const supabaseUrl = env.VITE_SUPABASE_URL || '';
-const supabaseAnonKey = env.VITE_SUPABASE_ANON_KEY || '';
+const rawUrl = (env.VITE_SUPABASE_URL || '').trim();
+const rawKey = (env.VITE_SUPABASE_ANON_KEY || '').trim();
 
 // Check if credentials are properly set
 export const isSupabaseConfigured = (): boolean => {
   return (
-    Boolean(supabaseUrl) &&
-    Boolean(supabaseAnonKey) &&
-    supabaseUrl !== 'https://your-supabase-url.supabase.co' &&
-    supabaseAnonKey !== 'your-anon-key'
+    Boolean(rawUrl) &&
+    Boolean(rawKey) &&
+    rawUrl !== 'https://your-supabase-url.supabase.co' &&
+    rawKey !== 'your-anon-key'
   );
 };
 
-// Fallback or active client instantiation
-const validUrl = isSupabaseConfigured() ? supabaseUrl : 'https://placeholder.supabase.co';
-const validKey = isSupabaseConfigured() ? supabaseAnonKey : 'placeholder-anon-key';
+// Fallback or active client instantiation (ALWAYS guaranteed to be a valid URL string)
+const validUrl = isSupabaseConfigured() ? rawUrl : 'https://placeholder.supabase.co';
+const validKey = isSupabaseConfigured() ? rawKey : 'placeholder-anon-key';
 
 export const supabase: SupabaseClient = createClient(validUrl, validKey, {
   auth: { 
