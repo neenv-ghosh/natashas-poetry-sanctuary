@@ -84,26 +84,40 @@ export default function App() {
   }, [activeDocId]);
 
   // Listen for real-time online/offline network changes
-  useEffect(() => {
-    const handleOnline = () => {
-      setIsOnline(true);
-      console.log('🟢 Connection restored. Re-syncing with Supabase...');
-      StorageService.syncWithSupabase();
-    };
+useEffect(() => {
+  const handleOnline = async () => {
+    setIsOnline(true);
+    console.log('🟢 Connection restored. Re-syncing with Supabase...');
+    await StorageService.syncWithSupabase();
+  };
 
-    const handleOffline = () => {
+  const handleOffline = async () => {
+    // 💡 Double-check real connectivity before switching to local storage mode
+    if (!navigator.onLine) {
       setIsOnline(false);
       console.log('🔴 Connection lost. Switching entirely to local storage mode.');
-    };
+      return;
+    }
 
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
+    // Ping Supabase or a quick endpoint to verify if connection actually dropped
+    try {
+      const res = await fetch('https://www.google.com/favicon.ico', { mode: 'no-cors', cache: 'no-store' });
+      // If fetch succeeds, network is alive — don't go offline!
+      console.log('🟡 Window network flicker ignored (connection active).');
+    } catch {
+      setIsOnline(false);
+      console.log('🔴 Connection confirmed lost. Switching entirely to local storage mode.');
+    }
+  };
 
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-    };
-  }, []);
+  window.addEventListener('online', handleOnline);
+  window.addEventListener('offline', handleOffline);
+
+  return () => {
+    window.removeEventListener('online', handleOnline);
+    window.removeEventListener('offline', handleOffline);
+  };
+}, []);
 
   // Load initial state & Sync with Supabase
   useEffect(() => {

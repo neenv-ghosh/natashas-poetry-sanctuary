@@ -52,6 +52,9 @@ export const supabase: SupabaseClient = createClient(validUrl, validKey, {
     params: {
       eventsPerSecond: 10,
     },
+    // Prevent false offline drops in Electron file:// environment
+    timeout: 30000,
+    heartbeatIntervalMs: 15000,
   },
 });
 
