@@ -66,6 +66,8 @@
       "electron/**/*"
     ],
     "mac": {
+      "entitlements": "entitlements.mac.plist",
+      "entitlementsInherit": "entitlements.mac.plist",
       "target": [
         {
           "target": "dmg",
