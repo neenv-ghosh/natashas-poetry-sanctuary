@@ -20,7 +20,8 @@ function createWindow() {
   if (isDev) {
     mainWindow.loadURL('http://localhost:3000');
   } else {
-    mainWindow.loadFile(path.join(__dirname, 'dist/index.html'));
+    // 💡 Passed as separate arguments to guarantee proper OS path joining
+    mainWindow.loadFile(path.join(__dirname, 'dist', 'index.html'));
   }
 
   // --- Window Control IPC Listeners ---
